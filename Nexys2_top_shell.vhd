@@ -145,7 +145,7 @@ LED <= CLOCKBUS_SIG(26 DOWNTO 19);
 --------------------------------------------------------------------------------------
 
 nibble0 <= elevator_floor;
-nibble1 <= "0000";
+nibble1 <= next_elevator_floor;
 nibble2 <= "0000";
 nibble3 <= "0000";
 
