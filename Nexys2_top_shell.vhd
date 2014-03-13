@@ -92,21 +92,32 @@ signal ClockBus_sig : STD_LOGIC_VECTOR (26 downto 0);
 --Insert your design's component declaration below	
 --------------------------------------------------------------------------------------
 
-COMPONENT MooreElevatorController_Shell
-	PORT(
-		clk : IN std_logic;
-		reset : IN std_logic;
-		stop : IN std_logic;
-		up_down : IN std_logic;          
-		floor : OUT std_logic_vector(3 downto 0)
-		);
-	END COMPONENT;
+---COMPONENT MooreElevatorController_Shell
+---	PORT(
+---		clk : IN std_logic;
+---		reset : IN std_logic;
+---		stop : IN std_logic;
+---		up_down : IN std_logic;          
+---		floor : OUT std_logic_vector(3 downto 0)
+---		);
+---	END COMPONENT;
+
+Component MealyElevatorController_Shell is
+    Port ( clk : in  STD_LOGIC;
+           reset : in  STD_LOGIC;
+           stop : in  STD_LOGIC;
+           up_down : in  STD_LOGIC;
+           floor : out  STD_LOGIC_VECTOR (3 downto 0);
+			  nextfloor : out std_logic_vector (3 downto 0));
+End Component;
 
 --------------------------------------------------------------------------------------
 --Insert any required signal declarations below
 --------------------------------------------------------------------------------------
 
 signal elevator_floor : std_logic_vector(3 downto 0);
+--Next line for mealy machine 
+signal next_elevator_floor : std_logic_vector(3 downto 0);
 
 begin
 
@@ -180,12 +191,20 @@ nibble3 <= "0000";
 --Instantiate the design you with to implement below and start wiring it up!:
 -----------------------------------------------------------------------------
 
-Inst_MooreElevatorController_Shell: MooreElevatorController_Shell PORT MAP(
-		clk => ClockBus_sig(25),
-		reset => btn(3) ,
+---Inst_MooreElevatorController_Shell: MooreElevatorController_Shell PORT MAP(
+---		clk => ClockBus_sig(25),
+---		reset => btn(3) ,
+---		stop => switch(1),
+---		up_down => switch(0),
+---		floor =>  elevator_floor
+---	);
+Inst_MealyElevatorController_Shell: MealyElevatorController_Shell PORT MAP(
+		clk =>ClockBus_sig(25) ,
+		reset => btn(3),
 		stop => switch(1),
 		up_down => switch(0),
-		floor =>  elevator_floor
+		floor => elevator_floor,
+		nextfloor =>next_elevator_floor
 	);
 
 end Behavioral;
