@@ -28,6 +28,10 @@ This bad code creates memory for the other inputs, which is dependent on the mac
 	floor_state_machine: process(clk, up_down, stop, reset)
 ```
 This code includes all of the inputs so that there is no memory assocated with them.
+#Notes to Self
+Can change the inputs and outputs of Moore machine to make B or A functionalities.
+Output logic-->what the machine outputs from the statements made above.
 
 #Documentation
 Berg helped me figure out the Mealy next state elevator output so that the next elevator floor could appear on the Nexys board.
+http://daringfireball.net/projects/markdown/syntax was used to find out how to do the code blocks in the code critiques.
